@@ -1,0 +1,53 @@
+Erstelle eine interaktive Button-Steuerung für die MovieVersionComparison-Komponente mit folgendem Ablauf:
+
+1. Initialisierung:
+	•	Beim Öffnen der MovieVersionComparison-Komponente müssen alle Versionen auf ihren aktuellen Status geprüft werden.
+	•	Erst wenn der Status jeder einzelnen Version bekannt ist, wird der jeweilige Button:
+	•	Anklickbar (grün), falls alle Bedingungen erfüllt sind.
+	•	Deaktiviert (grau), falls der Status dies erfordert.
+
+2. Startansicht:
+	•	Alle verfügbaren Versionen werden als Buttons dargestellt.
+	•	Alle Buttons sind grün umrandet und anklickbar.
+
+3. Auswahl einer Version (Download-Start):
+	•	Wenn eine Version ausgewählt wird (Button wird angeklickt):
+	•	Der Button wird grau und deaktiviert.
+	•	Ein Spinner erscheint auf dem Button mit dem Hinweis “Vorbereitung”.
+	•	Andere Versionen bleiben weiterhin anklickbar.
+
+4. NZB-Download via sabnzbd:
+	•	Nach erfolgreicher Übermittlung an den sabnzbd-Server erscheint eine Erfolgsmeldung (Popup).
+	•	Der Button bleibt ausgegraut und deaktiviert mit dem Status “Herunterladen”.
+	•	Andere Versionen bleiben weiterhin auswählbar.
+	•	NZB-Download-Endpunkt: api?mode=queue
+
+5. Entpackvorgang:
+	•	Nach dem Download wird die Datei unter /api/?mode=history entpackt.
+	•	Der Button bleibt ausgegraut und deaktiviert mit dem Hinweis “Entpacken läuft”.
+	•	Andere Versionen bleiben weiterhin anklickbar.
+
+6. Fehlerbehandlung:
+	•	Falls /api/?mode=history einen Fehler zurückgibt:
+	•	Der betroffene Button wird rot und zeigt eine Fehlermeldung an.
+	•	Der Button bleibt nicht mehr anklickbar.
+	•	Andere Versionen bleiben weiterhin auswählbar.
+
+7. Erfolgreiches Entpacken:
+	•	Falls /api/?mode=history den Status “Erfolgreich” zurückgibt:
+	•	Der Button bleibt ausgegraut, zeigt aber an, dass das Entpacken erfolgreich war.
+	•	Jetzt wird geprüft, ob die Datei auf dem S3 Hetzner Cloud Bucket verfügbar ist.
+
+8. Verfügbarkeit auf S3 prüfen:
+	•	Sobald die Datei auf dem S3 Bucket gefunden wird:
+	•	Der Button wird grün und wieder anklickbar.
+	•	Der Button-Text wechselt zu “Download”.
+	•	Andere Versionen bleiben weiterhin auswählbar.
+	•	Falls die Datei nach einer Minute nicht verfügbar ist, erscheint eine Fehlermeldung.
+
+Zusätzliche Hinweise:
+	•	Versionen werden über ihren Hash identifiziert.
+	•	API-Endpunkte zur Statusabfrage:
+	•	Download-Queue: api?mode=queue
+	•	Entpackstatus: /api/?mode=history
+	•	S3-Verfügbarkeit: Nach erfolgreichem Entpacken, max. 1 Minute Wartezeit.

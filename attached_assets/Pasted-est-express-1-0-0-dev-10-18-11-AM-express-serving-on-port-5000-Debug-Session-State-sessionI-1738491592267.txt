@@ -1,0 +1,546 @@
+est-express@1.0.0 dev
+10:18:11 AM [express] serving on port 5000
+Debug - Session State: {
+  sessionID: '1aN83XQpGcJQnnPXVKMpbAkispwOrFyl',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:12.454Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'QnpTeAjorX_YnJwIChxiuOPs2gm3rf12',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:12.687Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'GeTb1JKgddEOuP6-6wJXY08dd50cJufh',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.151Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'VIdxQWNnsMO4xkzKIL4OIJTB4cARSgWU',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.289Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'rCd0j0nkm4tIvnlbDGBWmfqPZ31V6O_1',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.297Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'YyyD7kmXCCpWSDjoeiyP6cu0G45XTwuK',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.761Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: '1mBbWLJtjuSV8tibfvnk8zNSCSDB909M',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.763Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'mKIBZinPaLiJR0yLnf60Aw2DUo55Ik9E',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.769Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'KkmMZRxPEauGbZvYJ2Ldz61lM9WUrEYl',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.912Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'MbtRNPQf2Mo6eILmhhgOeDF5MFHTB7za',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.915Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: '0erv87effyjr89gxoDFJTrVRqeORt49x',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.917Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'Kftcs605EUhaElZBTputspSxV_MI-R7h',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.920Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'rGkI1BlNmW-Fn6ptjMMCf-14A2FroxwY',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:13.943Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'gKPFNpoN65qnRrTgiKbydYSoGC8sAYjJ',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.045Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'oVzWxL6h5qkqJuTWszj6jo2oDThvgF8A',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.046Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'y3Djg7giGBPzRDfXlblY6wETbErLb-6c',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.048Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'Z1xhCmLwkDBFG0DPL7xWsmGTIhjyrWd5',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.066Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'IyAVmDk6EdOcOSnahZF3dIRVr2rulQf0',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.170Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'N6v1cDRUCF-p4jgzSfeUKz_2Rep10lZ6',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.172Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'SmdU-clIQU01A2kvQyfZACw_b4M2LDWt',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.173Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: '59hIv5l2xLfK0AwWVG6nVuFl0Oq5krSQ',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.194Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'HPQL7nLR8vqghHjHmVvNe12LKGRHfhEf',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.230Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: '7IblfZl01VpDAMOi0ZqVeurSOoz_cwwO',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.320Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'SeKeFXLvXZYDqzNG00Gew_HrpS22v2L1',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.321Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'ubhtjs7qwk0M3Ws3pwS8PF7nAIQkvfcx',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.322Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: '14FycsMpLRuiqi4J9MSIYUijg0tIprrr',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.323Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: '_MA5GkbpvSAjlVQCtDgERY4Ds8hvgIez',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.353Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'WeO-f_Hnwf14i86cThHbzgn6Y9NMNTdN',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.354Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: '1cXn4uws7IHH-gELFGc8wCjkLxqrIC2F',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.443Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'vQwY6_yS7CO57WSuUnaF6v5Q6KU8MiYH',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.444Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'ypfoERyZ_uNpPyRHUxU034gX3we9MxRy',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.459Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'tYaIpar9f8huKQ7Yy1CwYrdPE2oQGAZ0',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.460Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'mRPm1j18qkQ2QTIg4uSk5h4o6dNuz0zD',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.480Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
+Debug - Session State: {
+  sessionID: 'HJuCY7ClNDHTGwI_VtH8k-K9GipYjKe9',
+  session: Session {
+    cookie: {
+      path: '/',
+      _expires: 2025-03-04T10:18:14.481Z,
+      originalMaxAge: 2592000000,
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    }
+  },
+  isAuthenticated: false,
+  user: undefined,
+  passport: undefined
+}
