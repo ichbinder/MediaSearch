@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
@@ -42,7 +43,7 @@ app.use((req, res, next) => {
 
   // Improved error handling middleware
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    console.error('Error:', err);
+    console.error("Error:", err);
 
     // Only send response if it hasn't been sent yet
     if (!res.headersSent) {
@@ -52,8 +53,8 @@ app.use((req, res, next) => {
     }
 
     // Don't throw the error after handling it
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Full error details:', err);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Full error details:", err);
     }
   });
 
@@ -68,7 +69,7 @@ app.use((req, res, next) => {
   server.listen(PORT, "0.0.0.0", () => {
     log(`serving on port ${PORT}`);
   });
-})().catch(err => {
-  console.error('Fatal server error:', err);
+})().catch((err) => {
+  console.error("Fatal server error:", err);
   process.exit(1);
 });
