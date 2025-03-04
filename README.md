@@ -26,19 +26,27 @@ Eine umfassende Kino-Web-Anwendung für fortgeschrittene Filmsuche, Streaming-An
 ## Installation
 
 1. Repository klonen:
+
 ```bash
 git clone [repository-url]
 cd cinema-app
 ```
 
 2. Abhängigkeiten installieren:
+
 ```bash
 npm install
 ```
 
 ## Umgebungsvariablen
 
-Erstellen Sie eine `.env` Datei im Wurzelverzeichnis mit folgenden Variablen:
+Erstellen Sie eine `.env` Datei im Wurzelverzeichnis mit folgenden Variablen. Sie können die `.env.example` Datei als Vorlage verwenden:
+
+```bash
+cp .env.example .env
+```
+
+Dann passen Sie die Werte in der `.env` Datei an:
 
 ```env
 # Datenbank
@@ -56,21 +64,24 @@ SABNZBD_API_KEY="ihr-api-key"
 # TMDB
 TMDB_API_KEY="ihr-tmdb-api-key"
 
-# Optional: S3 Storage
-S3_ACCESS_KEY="ihr-s3-access-key"
-S3_SECRET_KEY="ihr-s3-secret-key"
-S3_BUCKET="ihr-bucket-name"
-S3_REGION="eu-central-1"
+# Hetzner S3 Storage
+HETZNER_S3_ACCESS_KEY="ihr-s3-access-key"
+HETZNER_S3_SECRET_KEY="ihr-s3-secret-key"
+HETZNER_S3_BUCKET="ihr-bucket-name"
+HETZNER_S3_REGION="hel1"
+HETZNER_S3_ENDPOINT="https://eu-central-1.s3.hetzner.cloud"
 ```
 
 ## Datenbank initialisieren
 
 1. Datenbank-Schema erstellen:
+
 ```bash
 npm run db:push
 ```
 
 2. Admin-Benutzer erstellen:
+
 ```bash
 npx tsx update_admin_password.ts
 ```
@@ -78,11 +89,19 @@ npx tsx update_admin_password.ts
 ## Anwendung starten
 
 Entwicklungsmodus:
+
 ```bash
 npm run dev
 ```
 
-Die Anwendung ist dann unter `http://localhost:5000` erreichbar.
+Die Anwendung ist dann unter `http://localhost:3000` erreichbar.
+
+Produktionsmodus:
+
+```bash
+npm run build
+npm start
+```
 
 ## Erste Anmeldung
 
@@ -98,16 +117,18 @@ Nach der Installation können Sie sich mit folgenden Zugangsdaten einloggen:
 - Frontend: React.js mit shadcn/ui
 - Backend: Node.js mit Express.js
 - Datenbank: PostgreSQL mit Drizzle ORM
-- API-Integration: TMDB, NZB, Sabnzbd
-- Cloud Storage: Hetzner Cloud S3
-- Authentifizierung: Passport.js
-- Styling: Tailwind CSS
+- ORM: Drizzle
+- Authentifizierung: Express Session
+- API Integration: TMDB, NZB, Sabnzbd, Hetzner S3
 
-## Entwickelt mit
+## Entwicklung
 
-- [React](https://reactjs.org/)
-- [Express](https://expressjs.com/)
-- [PostgreSQL](https://www.postgresql.org/)
-- [Drizzle ORM](https://orm.drizzle.team/)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
+- `npm run dev` - Startet den Entwicklungsserver
+- `npm run build` - Erstellt den Produktions-Build
+- `npm start` - Startet die Anwendung im Produktionsmodus
+- `npm run db:push` - Aktualisiert das Datenbankschema
+- `npm run check` - Führt TypeScript-Checks durch
+
+## Lizenz
+
+MIT
