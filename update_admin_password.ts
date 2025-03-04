@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { scrypt, randomBytes } from "crypto";
 import { promisify } from "util";
 import { db } from "./db";
@@ -25,20 +26,22 @@ async function updateAdminPassword() {
 
     if (existingAdmin) {
       // Update existing admin
-      await db.update(users)
+      await db
+        .update(users)
         .set({ password: hashedPassword })
         .where(eq(users.username, "admin"))
         .execute();
       console.log("Admin password updated successfully");
     } else {
       // Create new admin user
-      await db.insert(users)
+      await db
+        .insert(users)
         .values({
           username: "admin",
           password: hashedPassword,
           role: "admin",
           is_active: true,
-          is_approved: true
+          is_approved: true,
         })
         .execute();
       console.log("Admin user created successfully");
