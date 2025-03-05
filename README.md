@@ -52,6 +52,9 @@ Dann passen Sie die Werte in der `.env` Datei an:
 # Datenbank
 DATABASE_URL="postgresql://user:password@host:port/database"
 
+# Session
+SESSION_SECRET="ihr-session-secret"
+
 # NZB API
 NZB_API_URL="https://ihre-nzb-api-url"
 NZB_USERNAME="ihr-username"
