@@ -43,7 +43,18 @@ import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Loader2, UserPlus, Trash2, AlertTriangle, Key, Edit, CheckCircle, XCircle, Shield, Lock } from "lucide-react";
+import {
+  Loader2,
+  UserPlus,
+  Trash2,
+  AlertTriangle,
+  Key,
+  Edit,
+  CheckCircle,
+  XCircle,
+  Shield,
+  Lock,
+} from "lucide-react";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { queryClient } from "@/lib/queryClient";
@@ -54,7 +65,9 @@ const userRoleSchema = z.object({
 });
 
 const userNameSchema = z.object({
-  username: z.string().min(3, "Benutzername muss mindestens 3 Zeichen lang sein"),
+  username: z
+    .string()
+    .min(3, "Benutzername muss mindestens 3 Zeichen lang sein"),
 });
 
 const userPasswordSchema = z.object({
@@ -62,7 +75,9 @@ const userPasswordSchema = z.object({
 });
 
 const createUserSchema = z.object({
-  username: z.string().min(3, "Benutzername muss mindestens 3 Zeichen lang sein"),
+  username: z
+    .string()
+    .min(3, "Benutzername muss mindestens 3 Zeichen lang sein"),
   password: z.string().min(6, "Passwort muss mindestens 6 Zeichen lang sein"),
   role: z.enum(["user", "admin"]),
 });
@@ -75,7 +90,11 @@ export default function AdminUsersPage() {
     return <Redirect to="/" />;
   }
 
-  const { data: users, isLoading, error } = useQuery<SelectUser[]>({
+  const {
+    data: users,
+    isLoading,
+    error,
+  } = useQuery<SelectUser[]>({
     queryKey: ["/api/admin/users"],
   });
 
@@ -139,7 +158,13 @@ export default function AdminUsersPage() {
   });
 
   const updateRoleMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: number; data: z.infer<typeof userRoleSchema> }) => {
+    mutationFn: async ({
+      id,
+      data,
+    }: {
+      id: number;
+      data: z.infer<typeof userRoleSchema>;
+    }) => {
       const response = await fetch(`/api/admin/users/${id}/role`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -168,7 +193,13 @@ export default function AdminUsersPage() {
   });
 
   const updateUsernameMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: number; data: z.infer<typeof userNameSchema> }) => {
+    mutationFn: async ({
+      id,
+      data,
+    }: {
+      id: number;
+      data: z.infer<typeof userNameSchema>;
+    }) => {
       const response = await fetch(`/api/admin/users/${id}/username`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -197,11 +228,17 @@ export default function AdminUsersPage() {
   });
 
   const updatePasswordMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: number; data: z.infer<typeof userPasswordSchema> }) => {
-      const response = await fetch(`/api/admin/users/${id}/password`, {
-        method: "PATCH",
+    mutationFn: async ({
+      id,
+      data,
+    }: {
+      id: number;
+      data: z.infer<typeof userPasswordSchema>;
+    }) => {
+      const response = await fetch(`/api/admin/users/${id}/reset-password`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ newPassword: data.password }),
         credentials: "include",
       });
 
@@ -226,9 +263,20 @@ export default function AdminUsersPage() {
   });
 
   const toggleUserStatusMutation = useMutation({
-    mutationFn: async ({ id, type }: { id: number, type: 'active' | 'approved' }) => {
-      const response = await fetch(`/api/admin/users/${id}/toggle-${type}`, {
-        method: "POST",
+    mutationFn: async ({
+      id,
+      type,
+    }: {
+      id: number;
+      type: "active" | "approved";
+    }) => {
+      const endpoint =
+        type === "active"
+          ? `/api/admin/users/${id}/toggle-active`
+          : `/api/admin/users/${id}/toggle-approved`;
+
+      const response = await fetch(endpoint, {
+        method: "PATCH",
         credentials: "include",
       });
 
@@ -255,13 +303,29 @@ export default function AdminUsersPage() {
     mutationFn: async (userId: number) => {
       const response = await fetch(`/api/admin/users/${userId}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         credentials: "include",
       });
 
       if (!response.ok) {
-        const text = await response.text();
-        throw new Error(text);
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Ein Fehler ist aufgetreten");
+        } else {
+          const text = await response.text();
+          throw new Error(text || "Ein Fehler ist aufgetreten");
+        }
       }
+
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        return response.json();
+      }
+      return null;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
@@ -291,7 +355,9 @@ export default function AdminUsersPage() {
       <div className="container mx-auto py-8">
         <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
           <AlertTriangle className="h-12 w-12 text-destructive" />
-          <h2 className="text-xl font-semibold">Fehler beim Laden der Benutzer</h2>
+          <h2 className="text-xl font-semibold">
+            Fehler beim Laden der Benutzer
+          </h2>
           <p className="text-muted-foreground">{error.message}</p>
         </div>
       </div>
@@ -417,10 +483,20 @@ export default function AdminUsersPage() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <span className={user.is_approved ? "text-green-500" : "text-yellow-500"}>
+                      <span
+                        className={
+                          user.is_approved
+                            ? "text-green-500"
+                            : "text-yellow-500"
+                        }
+                      >
                         {user.is_approved ? "Freigegeben" : "Wartend"}
                       </span>
-                      <span className={user.is_active ? "text-green-500" : "text-red-500"}>
+                      <span
+                        className={
+                          user.is_active ? "text-green-500" : "text-red-500"
+                        }
+                      >
                         {user.is_active ? "Aktiv" : "Gesperrt"}
                       </span>
                     </div>
@@ -433,18 +509,13 @@ export default function AdminUsersPage() {
                       {/* Rolle ändern */}
                       <Dialog>
                         <DialogTrigger asChild>
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="outline" size="sm">
-                                  <Shield className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Benutzerrolle ändern</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            title="Benutzerrolle ändern"
+                          >
+                            <Shield className="h-4 w-4" />
+                          </Button>
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
@@ -465,7 +536,7 @@ export default function AdminUsersPage() {
                                     <FormLabel>Rolle</FormLabel>
                                     <Select
                                       onValueChange={field.onChange}
-                                      defaultValue={user.role}
+                                      defaultValue={field.value}
                                     >
                                       <FormControl>
                                         <SelectTrigger>
@@ -473,15 +544,26 @@ export default function AdminUsersPage() {
                                         </SelectTrigger>
                                       </FormControl>
                                       <SelectContent>
-                                        <SelectItem value="user">Benutzer</SelectItem>
-                                        <SelectItem value="admin">Administrator</SelectItem>
+                                        <SelectItem value="user">
+                                          Benutzer
+                                        </SelectItem>
+                                        <SelectItem value="admin">
+                                          Administrator
+                                        </SelectItem>
                                       </SelectContent>
                                     </Select>
                                     <FormMessage />
                                   </FormItem>
                                 )}
                               />
-                              <Button type="submit" className="w-full">
+                              <Button
+                                type="submit"
+                                className="w-full"
+                                disabled={updateRoleMutation.isPending}
+                              >
+                                {updateRoleMutation.isPending && (
+                                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                )}
                                 Speichern
                               </Button>
                             </form>
@@ -492,18 +574,13 @@ export default function AdminUsersPage() {
                       {/* Benutzernamen ändern */}
                       <Dialog>
                         <DialogTrigger asChild>
-                         <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="outline" size="sm">
-                                  <Edit className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Benutzernamen ändern</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            title="Benutzernamen ändern"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
@@ -512,7 +589,10 @@ export default function AdminUsersPage() {
                           <Form {...usernameForm}>
                             <form
                               onSubmit={usernameForm.handleSubmit((data) =>
-                                updateUsernameMutation.mutate({ id: user.id, data })
+                                updateUsernameMutation.mutate({
+                                  id: user.id,
+                                  data,
+                                })
                               )}
                               className="space-y-4"
                             >
@@ -523,13 +603,20 @@ export default function AdminUsersPage() {
                                   <FormItem>
                                     <FormLabel>Benutzername</FormLabel>
                                     <FormControl>
-                                      <Input {...field} defaultValue={user.username} />
+                                      <Input {...field} />
                                     </FormControl>
                                     <FormMessage />
                                   </FormItem>
                                 )}
                               />
-                              <Button type="submit" className="w-full">
+                              <Button
+                                type="submit"
+                                className="w-full"
+                                disabled={updateUsernameMutation.isPending}
+                              >
+                                {updateUsernameMutation.isPending && (
+                                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                )}
                                 Speichern
                               </Button>
                             </form>
@@ -537,30 +624,28 @@ export default function AdminUsersPage() {
                         </DialogContent>
                       </Dialog>
 
-                      {/* Passwort ändern */}
+                      {/* Passwort zurücksetzen */}
                       <Dialog>
                         <DialogTrigger asChild>
-                           <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="outline" size="sm">
-                                  <Key className="h-4 w-4" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Passwort zurücksetzen</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            title="Passwort zurücksetzen"
+                          >
+                            <Key className="h-4 w-4" />
+                          </Button>
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
-                            <DialogTitle>Passwort ändern</DialogTitle>
+                            <DialogTitle>Passwort zurücksetzen</DialogTitle>
                           </DialogHeader>
                           <Form {...passwordForm}>
                             <form
                               onSubmit={passwordForm.handleSubmit((data) =>
-                                updatePasswordMutation.mutate({ id: user.id, data })
+                                updatePasswordMutation.mutate({
+                                  id: user.id,
+                                  data,
+                                })
                               )}
                               className="space-y-4"
                             >
@@ -577,7 +662,14 @@ export default function AdminUsersPage() {
                                   </FormItem>
                                 )}
                               />
-                              <Button type="submit" className="w-full">
+                              <Button
+                                type="submit"
+                                className="w-full"
+                                disabled={updatePasswordMutation.isPending}
+                              >
+                                {updatePasswordMutation.isPending && (
+                                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                )}
                                 Speichern
                               </Button>
                             </form>
@@ -586,66 +678,71 @@ export default function AdminUsersPage() {
                       </Dialog>
 
                       {/* Benutzer sperren/entsperren */}
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => toggleUserStatusMutation.mutate({ id: user.id, type: 'active' })}
-                            >
-                              {user.is_active ? (
-                                <Lock className="h-4 w-4 text-red-500" />
-                              ) : (
-                                <Lock className="h-4 w-4 text-green-500" />
-                              )}
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{user.is_active ? 'Benutzer sperren' : 'Benutzer entsperren'}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        title={
+                          user.is_active
+                            ? "Benutzer sperren"
+                            : "Benutzer entsperren"
+                        }
+                        onClick={() =>
+                          toggleUserStatusMutation.mutate({
+                            id: user.id,
+                            type: "active",
+                          })
+                        }
+                        disabled={toggleUserStatusMutation.isPending}
+                      >
+                        {toggleUserStatusMutation.isPending ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : user.is_active ? (
+                          <Lock className="h-4 w-4 text-red-500" />
+                        ) : (
+                          <Lock className="h-4 w-4 text-green-500" />
+                        )}
+                      </Button>
 
                       {/* Benutzer freigeben/zurückziehen */}
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => toggleUserStatusMutation.mutate({ id: user.id, type: 'approved' })}
-                            >
-                              {user.is_approved ? (
-                                <XCircle className="h-4 w-4 text-red-500" />
-                              ) : (
-                                <CheckCircle className="h-4 w-4 text-green-500" />
-                              )}
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{user.is_approved ? 'Freigabe zurückziehen' : 'Benutzer freigeben'}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        title={
+                          user.is_approved
+                            ? "Freigabe zurückziehen"
+                            : "Benutzer freigeben"
+                        }
+                        onClick={() =>
+                          toggleUserStatusMutation.mutate({
+                            id: user.id,
+                            type: "approved",
+                          })
+                        }
+                        disabled={toggleUserStatusMutation.isPending}
+                      >
+                        {toggleUserStatusMutation.isPending ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : user.is_approved ? (
+                          <XCircle className="h-4 w-4 text-red-500" />
+                        ) : (
+                          <CheckCircle className="h-4 w-4 text-green-500" />
+                        )}
+                      </Button>
 
                       {/* Benutzer löschen */}
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button
-                              variant="destructive"
-                              size="sm"
-                              onClick={() => deleteUserMutation.mutate(user.id)}
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Benutzer löschen</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        title="Benutzer löschen"
+                        onClick={() => deleteUserMutation.mutate(user.id)}
+                        disabled={deleteUserMutation.isPending}
+                      >
+                        {deleteUserMutation.isPending ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Trash2 className="h-4 w-4" />
+                        )}
+                      </Button>
                     </div>
                   </TableCell>
                 </TableRow>
