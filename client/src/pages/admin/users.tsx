@@ -65,20 +65,16 @@ const userRoleSchema = z.object({
 });
 
 const userNameSchema = z.object({
-  username: z
-    .string()
-    .min(3, "Benutzername muss mindestens 3 Zeichen lang sein"),
+  username: z.string().min(3, "Username must be at least 3 characters long"),
 });
 
 const userPasswordSchema = z.object({
-  password: z.string().min(6, "Passwort muss mindestens 6 Zeichen lang sein"),
+  password: z.string().min(6, "Password must be at least 6 characters long"),
 });
 
 const createUserSchema = z.object({
-  username: z
-    .string()
-    .min(3, "Benutzername muss mindestens 3 Zeichen lang sein"),
-  password: z.string().min(6, "Passwort muss mindestens 6 Zeichen lang sein"),
+  username: z.string().min(3, "Username must be at least 3 characters long"),
+  password: z.string().min(6, "Password must be at least 6 characters long"),
   role: z.enum(["user", "admin"]),
 });
 
@@ -145,12 +141,12 @@ export default function AdminUsersPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
-      toast({ title: "Benutzer erstellt" });
+      toast({ title: "User created" });
       createForm.reset();
     },
     onError: (error: Error) => {
       toast({
-        title: "Fehler",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -180,12 +176,12 @@ export default function AdminUsersPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
-      toast({ title: "Benutzerrolle aktualisiert" });
+      toast({ title: "User role updated" });
       roleForm.reset();
     },
     onError: (error: Error) => {
       toast({
-        title: "Fehler",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -215,12 +211,12 @@ export default function AdminUsersPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
-      toast({ title: "Benutzername aktualisiert" });
+      toast({ title: "Username updated" });
       usernameForm.reset();
     },
     onError: (error: Error) => {
       toast({
-        title: "Fehler",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -250,12 +246,12 @@ export default function AdminUsersPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
-      toast({ title: "Passwort aktualisiert" });
+      toast({ title: "Password updated" });
       passwordForm.reset();
     },
     onError: (error: Error) => {
       toast({
-        title: "Fehler",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -288,11 +284,11 @@ export default function AdminUsersPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
-      toast({ title: "Benutzerstatus aktualisiert" });
+      toast({ title: "User status updated" });
     },
     onError: (error: Error) => {
       toast({
-        title: "Fehler",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -314,10 +310,10 @@ export default function AdminUsersPage() {
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
           const errorData = await response.json();
-          throw new Error(errorData.message || "Ein Fehler ist aufgetreten");
+          throw new Error(errorData.message || "An error occurred");
         } else {
           const text = await response.text();
-          throw new Error(text || "Ein Fehler ist aufgetreten");
+          throw new Error(text || "An error occurred");
         }
       }
 
@@ -329,11 +325,11 @@ export default function AdminUsersPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/users"] });
-      toast({ title: "Benutzer gelöscht" });
+      toast({ title: "User deleted" });
     },
     onError: (error: Error) => {
       toast({
-        title: "Fehler",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -355,9 +351,7 @@ export default function AdminUsersPage() {
       <div className="container mx-auto py-8">
         <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
           <AlertTriangle className="h-12 w-12 text-destructive" />
-          <h2 className="text-xl font-semibold">
-            Fehler beim Laden der Benutzer
-          </h2>
+          <h2 className="text-xl font-semibold">Error loading users</h2>
           <p className="text-muted-foreground">{error.message}</p>
         </div>
       </div>
@@ -367,17 +361,17 @@ export default function AdminUsersPage() {
   return (
     <div className="container mx-auto py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Benutzerverwaltung</h1>
+        <h1 className="text-2xl font-bold">User Management</h1>
         <Dialog>
           <DialogTrigger asChild>
             <Button>
               <UserPlus className="mr-2 h-4 w-4" />
-              Neuer Benutzer
+              New User
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Neuen Benutzer erstellen</DialogTitle>
+              <DialogTitle>Create New User</DialogTitle>
             </DialogHeader>
             <Form {...createForm}>
               <form
@@ -391,7 +385,7 @@ export default function AdminUsersPage() {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Benutzername</FormLabel>
+                      <FormLabel>Username</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -404,7 +398,7 @@ export default function AdminUsersPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Passwort</FormLabel>
+                      <FormLabel>Password</FormLabel>
                       <FormControl>
                         <Input type="password" {...field} />
                       </FormControl>
@@ -417,18 +411,18 @@ export default function AdminUsersPage() {
                   name="role"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Rolle</FormLabel>
+                      <FormLabel>Role</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Wählen Sie eine Rolle" />
+                            <SelectValue placeholder="Select a role" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="user">Benutzer</SelectItem>
+                          <SelectItem value="user">User</SelectItem>
                           <SelectItem value="admin">Administrator</SelectItem>
                         </SelectContent>
                       </Select>
@@ -444,7 +438,7 @@ export default function AdminUsersPage() {
                   {createUserMutation.isPending && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Erstellen
+                  Create
                 </Button>
               </form>
             </Form>
@@ -455,9 +449,9 @@ export default function AdminUsersPage() {
       {!users?.length ? (
         <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
           <UserPlus className="h-12 w-12 text-muted-foreground" />
-          <h2 className="text-xl font-semibold">Keine Benutzer gefunden</h2>
+          <h2 className="text-xl font-semibold">No users found</h2>
           <p className="text-muted-foreground">
-            Erstellen Sie einen neuen Benutzer, um loszulegen.
+            Create a new user to get started.
           </p>
         </div>
       ) : (
@@ -466,11 +460,11 @@ export default function AdminUsersPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>ID</TableHead>
-                <TableHead>Benutzername</TableHead>
-                <TableHead>Rolle</TableHead>
+                <TableHead>Username</TableHead>
+                <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Erstellt am</TableHead>
-                <TableHead>Aktionen</TableHead>
+                <TableHead>Created at</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -479,7 +473,7 @@ export default function AdminUsersPage() {
                   <TableCell>{user.id}</TableCell>
                   <TableCell>{user.username}</TableCell>
                   <TableCell>
-                    {user.role === "admin" ? "Administrator" : "Benutzer"}
+                    {user.role === "admin" ? "Administrator" : "User"}
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
@@ -490,14 +484,14 @@ export default function AdminUsersPage() {
                             : "text-yellow-500"
                         }
                       >
-                        {user.is_approved ? "Freigegeben" : "Wartend"}
+                        {user.is_approved ? "Approved" : "Pending"}
                       </span>
                       <span
                         className={
                           user.is_active ? "text-green-500" : "text-red-500"
                         }
                       >
-                        {user.is_active ? "Aktiv" : "Gesperrt"}
+                        {user.is_active ? "Active" : "Locked"}
                       </span>
                     </div>
                   </TableCell>
@@ -506,20 +500,20 @@ export default function AdminUsersPage() {
                   </TableCell>
                   <TableCell>
                     <div className="flex space-x-2">
-                      {/* Rolle ändern */}
+                      {/* Change role */}
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button
                             variant="outline"
                             size="sm"
-                            title="Benutzerrolle ändern"
+                            title="Change user role"
                           >
                             <Shield className="h-4 w-4" />
                           </Button>
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
-                            <DialogTitle>Benutzerrolle ändern</DialogTitle>
+                            <DialogTitle>Change User Role</DialogTitle>
                           </DialogHeader>
                           <Form {...roleForm}>
                             <form
@@ -533,19 +527,19 @@ export default function AdminUsersPage() {
                                 name="role"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Rolle</FormLabel>
+                                    <FormLabel>Role</FormLabel>
                                     <Select
                                       onValueChange={field.onChange}
                                       defaultValue={field.value}
                                     >
                                       <FormControl>
                                         <SelectTrigger>
-                                          <SelectValue placeholder="Wählen Sie eine Rolle" />
+                                          <SelectValue placeholder="Select a role" />
                                         </SelectTrigger>
                                       </FormControl>
                                       <SelectContent>
                                         <SelectItem value="user">
-                                          Benutzer
+                                          User
                                         </SelectItem>
                                         <SelectItem value="admin">
                                           Administrator
@@ -564,27 +558,27 @@ export default function AdminUsersPage() {
                                 {updateRoleMutation.isPending && (
                                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                 )}
-                                Speichern
+                                Save
                               </Button>
                             </form>
                           </Form>
                         </DialogContent>
                       </Dialog>
 
-                      {/* Benutzernamen ändern */}
+                      {/* Change username */}
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button
                             variant="outline"
                             size="sm"
-                            title="Benutzernamen ändern"
+                            title="Change username"
                           >
                             <Edit className="h-4 w-4" />
                           </Button>
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
-                            <DialogTitle>Benutzernamen ändern</DialogTitle>
+                            <DialogTitle>Change Username</DialogTitle>
                           </DialogHeader>
                           <Form {...usernameForm}>
                             <form
@@ -601,7 +595,7 @@ export default function AdminUsersPage() {
                                 name="username"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Benutzername</FormLabel>
+                                    <FormLabel>Username</FormLabel>
                                     <FormControl>
                                       <Input {...field} />
                                     </FormControl>
@@ -617,27 +611,27 @@ export default function AdminUsersPage() {
                                 {updateUsernameMutation.isPending && (
                                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                 )}
-                                Speichern
+                                Save
                               </Button>
                             </form>
                           </Form>
                         </DialogContent>
                       </Dialog>
 
-                      {/* Passwort zurücksetzen */}
+                      {/* Reset password */}
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button
                             variant="outline"
                             size="sm"
-                            title="Passwort zurücksetzen"
+                            title="Reset password"
                           >
                             <Key className="h-4 w-4" />
                           </Button>
                         </DialogTrigger>
                         <DialogContent>
                           <DialogHeader>
-                            <DialogTitle>Passwort zurücksetzen</DialogTitle>
+                            <DialogTitle>Reset Password</DialogTitle>
                           </DialogHeader>
                           <Form {...passwordForm}>
                             <form
@@ -654,7 +648,7 @@ export default function AdminUsersPage() {
                                 name="password"
                                 render={({ field }) => (
                                   <FormItem>
-                                    <FormLabel>Neues Passwort</FormLabel>
+                                    <FormLabel>New Password</FormLabel>
                                     <FormControl>
                                       <Input type="password" {...field} />
                                     </FormControl>
@@ -670,22 +664,18 @@ export default function AdminUsersPage() {
                                 {updatePasswordMutation.isPending && (
                                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                 )}
-                                Speichern
+                                Save
                               </Button>
                             </form>
                           </Form>
                         </DialogContent>
                       </Dialog>
 
-                      {/* Benutzer sperren/entsperren */}
+                      {/* Lock/unlock user */}
                       <Button
                         variant="outline"
                         size="sm"
-                        title={
-                          user.is_active
-                            ? "Benutzer sperren"
-                            : "Benutzer entsperren"
-                        }
+                        title={user.is_active ? "Lock user" : "Unlock user"}
                         onClick={() =>
                           toggleUserStatusMutation.mutate({
                             id: user.id,
@@ -703,14 +693,12 @@ export default function AdminUsersPage() {
                         )}
                       </Button>
 
-                      {/* Benutzer freigeben/zurückziehen */}
+                      {/* Approve/revoke user */}
                       <Button
                         variant="outline"
                         size="sm"
                         title={
-                          user.is_approved
-                            ? "Freigabe zurückziehen"
-                            : "Benutzer freigeben"
+                          user.is_approved ? "Revoke approval" : "Approve user"
                         }
                         onClick={() =>
                           toggleUserStatusMutation.mutate({
@@ -729,11 +717,11 @@ export default function AdminUsersPage() {
                         )}
                       </Button>
 
-                      {/* Benutzer löschen */}
+                      {/* Delete user */}
                       <Button
                         variant="destructive"
                         size="sm"
-                        title="Benutzer löschen"
+                        title="Delete user"
                         onClick={() => deleteUserMutation.mutate(user.id)}
                         disabled={deleteUserMutation.isPending}
                       >
